@@ -7,7 +7,7 @@ pre:
 	bash bin/pre.sh
 
 packer:
-	packer build ubuntu-ci.pkr.hcl
+	packer build -var-file='credentials.pkr.hcl' ubuntu-ci.pkr.hcl
 
 post:
 	bash bin/post.sh
