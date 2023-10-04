@@ -22,9 +22,12 @@ qm set $VMID --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID-disk-0
 qm set $VMID --ide2 $PVE_DISK_STORAGE:cloudinit
 qm set $VMID --boot c --bootdisk scsi0
 qm set $VMID --serial0 socket --vga serial0
-qm set $VMID --ipconfig0 ip=dhcp
+qm set $VMID --ipconfig0 ip=10.100.4.243/24,gw=10.100.4.1
+#qm set $VMID --ipconfig0 ip=dhcp
+
 qm resize $VMID scsi0 $DISK_SIZE
 
 qm template $VMID
 
 rm $TMP_IMG_NAME
+
