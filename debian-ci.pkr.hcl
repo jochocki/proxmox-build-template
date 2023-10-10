@@ -42,7 +42,7 @@ variable "proxmox_network_bridge" {
   default = "vmbr0"
 }
 
-source "proxmox-clone" "ubuntu" {
+source "proxmox-clone" "debian" {
   insecure_skip_tls_verify = true
   full_clone = false
 
@@ -54,7 +54,7 @@ source "proxmox-clone" "ubuntu" {
   cores           = "1"
   memory          = "512"
   scsi_controller = "virtio-scsi-pci"
-  vm_id           = "9000"
+  vm_id           = "8000"
 
   ssh_username = "packer"
   qemu_agent = true
@@ -72,7 +72,7 @@ source "proxmox-clone" "ubuntu" {
 }
 
 build {
-  sources = ["source.proxmox-clone.ubuntu"]
+  sources = ["source.proxmox-clone.debian"]
 
   provisioner "shell" {
     script = "bin/bootstrap.sh"

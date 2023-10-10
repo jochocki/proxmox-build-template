@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 set -e
+#------------Ubuntu/debian----------------------
+
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -14,3 +16,5 @@ defaults {
 EOF
 
 sudo cloud-init clean
+
+

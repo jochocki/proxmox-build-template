@@ -1,5 +1,8 @@
 # URL to the latest Ubutnu VM image
-CLOUD_INIT_IMAGE_URL=https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+CLOUD_INIT_UBUNTU_IMAGE_URL=https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+# URL to the latest Debian VM image
+CLOUD_INIT_DEBIAN_IMAGE_URL=https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2
+
 
 # SSH public key configured for the template
 TEMPLATE_SSH_PUBLIC_KEY=ssh-rsa AAAAB[...]kaCwH your.email@gmail.com

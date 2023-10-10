@@ -30,8 +30,9 @@ cd /opt/build-template
 Copy the environment variable file and edit with your own parameters.
 
 ```
-cp env .env
+cp env .env && cp credentials.pkr.hcl.example credentials.pkr.hcl
 vim .env
+vim credentials.pkr.hcl
 ```
 
 ### Setup systemd timers

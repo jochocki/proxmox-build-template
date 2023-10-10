@@ -1,13 +1,17 @@
 include .env
 export
 
-all: pre packer post
+all: pre packer_ubuntu packer_debian post
 
 pre:
 	bash bin/pre.sh
 
-packer:
-	packer build ubuntu-ci.pkr.hcl
+packer_ubuntu:
+	packer build -var-file='credentials.pkr.hcl' ubuntu-ci.pkr.hcl
+
+packer_debian:
+	packer build -var-file='credentials.pkr.hcl' debian-ci.pkr.hcl
+	
 
 post:
 	bash bin/post.sh
