@@ -18,6 +18,7 @@ virt-customize --install qemu-guest-agent -a $TMP_UBUNTU_IMG_NAME
 qm destroy 9000 --purge || echo "Template already missing."
 qm destroy 8999 --purge || echo "VM already missing."
 
+<<<<<<< HEAD
 qm create $VMID_UBUNTU --name $TEMPL_UBUNTU_NAME --memory $MEM_UBUNTU --net0 virtio,bridge=$PKR_VAR_proxmox_network_bridge
 qm importdisk $VMID_UBUNTU $TMP_UBUNTU_IMG_NAME $PVE_DISK_STORAGE
 qm set $VMID_UBUNTU --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID_UBUNTU-disk-0
@@ -26,9 +27,22 @@ qm set $VMID_UBUNTU --boot c --bootdisk scsi0
 qm set $VMID_UBUNTU --serial0 socket --vga serial0
 qm set $VMID_UBUNTU --ipconfig0 $IP_CONFIG_UBUNTU
 qm resize $VMID_UBUNTU scsi0 $DISK_SIZE_UBUNTU
+=======
+qm create $VMID --name $TEMPL_NAME --memory $MEM --net0 virtio,bridge=$PKR_VAR_proxmox_network_bridge
+qm importdisk $VMID $TMP_IMG_NAME $PVE_DISK_STORAGE
+qm set $VMID --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID-disk-0
+qm set $VMID --ide2 $PVE_DISK_STORAGE:cloudinit
+qm set $VMID --boot c --bootdisk scsi0
+qm set $VMID --serial0 socket --vga serial0
+qm set $VMID --ipconfig0 ip=10.100.4.243/24,gw=10.100.4.1
+#qm set $VMID --ipconfig0 ip=dhcp
+
+qm resize $VMID scsi0 $DISK_SIZE
+>>>>>>> refs/remotes/origin/main
 
 qm template $VMID_UBUNTU
 
+<<<<<<< HEAD
 rm $TMP_UBUNTU_IMG_NAME
 
 
@@ -61,3 +75,7 @@ qm resize $VMID_DEBIAN scsi0 $DISK_SIZE_DEBIAN
 qm template $VMID_DEBIAN
 
 rm $TMP_DEBIAN_IMG_NAME
+=======
+rm $TMP_IMG_NAME
+
+>>>>>>> refs/remotes/origin/main

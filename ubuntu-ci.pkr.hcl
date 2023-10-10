@@ -17,7 +17,10 @@ variable "proxmox_api_url" {
   type    = string
 }
 
+<<<<<<< HEAD
 #Waiting for newer version of proxmox packer to loggin via token/secret
+=======
+>>>>>>> refs/remotes/origin/main
 #variable "proxmox_api_token_id" {
 #  type    = string
 #}
