@@ -72,7 +72,7 @@ TMP_ALMA_IMG_NAME="/tmp/alma9.qcow2"
 TEMPL_ALMA_NAME="alma9-temp"
 VMID_ALMA="6999"
 MEM_ALMA="1024"
-DISK_SIZE_ALMA="5G"
+DISK_SIZE_ALMA="15G"
 IP_CONFIG_ALMA="ip=10.100.4.238/24,gw=10.100.4.1"
 #Change to your IPs or use DHCP if you want
 #IP_CONFIG_DEBIAN="ip=dhcp"
