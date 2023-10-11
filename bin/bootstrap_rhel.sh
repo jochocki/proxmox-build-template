@@ -3,10 +3,11 @@
 set -e
 #------------Alma9----------------------
 
-
 export RHEL_FRONTEND=noninteractive
 
-sudo yum install -y linux-modules-extra-$(uname -r) cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
+hostnamectl 
+
+sudo yum install -y cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
 
 sudo tee /etc/multipath.conf <<-'EOF'
 defaults {

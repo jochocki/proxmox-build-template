@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 set -e
-#------------Ubuntu/debian----------------------
+#------------Ubuntu----------------------
+
 
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt-get install -y cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
+sudo apt-get install -y linux-modules-extra-$(uname -r) cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
 
 hostnamectl
 
