@@ -5,12 +5,12 @@ variable "proxmox_host_node" {
 
 variable "proxmox_source_template" {
   type    = string
-  default = "ubuntu-temp"
+  default = "alma9-temp"
 }
 
 variable "proxmox_template_name" {
   type    = string
-  default = "ubuntu-template"
+  default = "alma9-template"
 }
 
 variable "proxmox_api_url" {
