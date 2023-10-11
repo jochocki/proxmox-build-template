@@ -51,8 +51,8 @@ source "proxmox-clone" "alma9" {
   clone_vm      = "${var.proxmox_source_template}"
 
   os              = "l26"
-  cores           = "1"
-  memory          = "512"
+  cores           = "2"
+  memory          = "2048"
   scsi_controller = "virtio-scsi-pci"
   vm_id           = "7000"
 

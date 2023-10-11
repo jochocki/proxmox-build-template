@@ -52,7 +52,7 @@ source "proxmox-clone" "debian" {
 
   os              = "l26"
   cores           = "1"
-  memory          = "512"
+  memory          = "1024"
   scsi_controller = "virtio-scsi-pci"
   vm_id           = "8000"
 

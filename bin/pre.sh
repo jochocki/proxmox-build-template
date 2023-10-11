@@ -90,6 +90,8 @@ qm set $VMID_ALMA --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID_AL
 qm set $VMID_ALMA --ide2 $PVE_DISK_STORAGE:cloudinit
 qm set $VMID_ALMA --boot c --bootdisk scsi0
 qm set $VMID_ALMA --serial0 socket --vga serial0
+#because of kernel panics bug cpu has to be host
+qm set $VMID_ALMA --cpu host
 qm set $VMID_ALMA --ipconfig0 $IP_CONFIG_ALMA
 qm resize $VMID_ALMA scsi0 $DISK_SIZE_ALMA
 
