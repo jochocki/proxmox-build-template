@@ -41,3 +41,23 @@ END
 )
 
 echo "$MESSAGE" | proxmox-mail-forward
+
+#------------Alma9----------------------
+
+echo $TEMPLATE_SSH_PUBLIC_KEY > /tmp/ssh_public_key
+
+qm set 7000 --ciuser $TEMPLATE_SSH_USER
+qm set 7000 --sshkeys /tmp/ssh_public_key
+qm set 7000 --name alma9-ci
+
+rm /tmp/ssh_public_key
+qm destroy 6999 --purge || echo "VM already missing."
+
+MESSAGE=$(cat <<-END
+Subject: build-template
+
+Successfully built template alma9-ci
+END
+)
+
+echo "$MESSAGE" | proxmox-mail-forward

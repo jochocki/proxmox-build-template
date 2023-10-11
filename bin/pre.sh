@@ -65,3 +65,34 @@ qm resize $VMID_DEBIAN scsi0 $DISK_SIZE_DEBIAN
 qm template $VMID_DEBIAN
 
 rm $TMP_DEBIAN_IMG_NAME
+
+#------------Alma9----------------------
+
+TMP_ALMA_IMG_NAME="/tmp/alma9.qcow2"
+TEMPL_ALMA_NAME="alma9-temp"
+VMID_ALMA="6999"
+MEM_ALMA="1024"
+DISK_SIZE_ALMA="5G"
+IP_CONFIG_ALMA="ip=10.100.4.238/24,gw=10.100.4.1"
+#Change to your IPs or use DHCP if you want
+#IP_CONFIG_DEBIAN="ip=dhcp"
+
+wget -O $TMP_ALMA_IMG_NAME $CLOUD_INIT_ALMA_IMAGE_URL
+
+virt-customize --install qemu-guest-agent -a $TMP_ALMA_IMG_NAME
+
+qm destroy 7000 --purge || echo "Template already missing."
+qm destroy 6999 --purge || echo "VM already missing."
+
+qm create $VMID_ALMA --name $TEMPL_ALMA_NAME --memory $MEM_ALMA --net0 virtio,bridge=$PKR_VAR_proxmox_network_bridge
+qm importdisk $VMID_ALMA $TMP_ALMA_IMG_NAME $PVE_DISK_STORAGE
+qm set $VMID_ALMA --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID_DEBIAN-disk-0
+qm set $VMID_ALMA --ide2 $PVE_DISK_STORAGE:cloudinit
+qm set $VMID_ALMA --boot c --bootdisk scsi0
+qm set $VMID_ALMA --serial0 socket --vga serial0
+qm set $VMID_ALMA --ipconfig0 $IP_CONFIG_ALMA
+qm resize $VMID_ALMA scsi0 $DISK_SIZE_ALMA
+
+qm template $VMID_ALMA
+
+rm $TMP_ALMA_IMG_NAME

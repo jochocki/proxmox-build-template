@@ -42,7 +42,7 @@ variable "proxmox_network_bridge" {
   default = "vmbr0"
 }
 
-source "proxmox-clone" "debian" {
+source "proxmox-clone" "alma9" {
   insecure_skip_tls_verify = true
   full_clone = false
 
@@ -54,7 +54,7 @@ source "proxmox-clone" "debian" {
   cores           = "1"
   memory          = "512"
   scsi_controller = "virtio-scsi-pci"
-  vm_id           = "8000"
+  vm_id           = "7000"
 
   ssh_username = "packer"
   qemu_agent = true
@@ -72,9 +72,9 @@ source "proxmox-clone" "debian" {
 }
 
 build {
-  sources = ["source.proxmox-clone.debian"]
+  sources = ["source.proxmox-clone.alma9"]
 
   provisioner "shell" {
-    script = "bin/bootstrap_deb.sh"
+    script = "bin/bootstrap_rhel.sh"
   }
 }

@@ -75,6 +75,6 @@ build {
   sources = ["source.proxmox-clone.ubuntu"]
 
   provisioner "shell" {
-    script = "bin/bootstrap.sh"
+    script = "bin/bootstrap_deb.sh"
   }
 }

@@ -39,7 +39,7 @@ apt-get update && apt-get install packer
 
 
 Make sure these VM IDs are not used:
-8999, 9000, 8000, 7999
+8999, 9000, 8000, 7999, 7000, 6999
 
 
 
