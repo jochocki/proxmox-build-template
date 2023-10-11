@@ -86,7 +86,7 @@ qm destroy 6999 --purge || echo "VM already missing."
 
 qm create $VMID_ALMA --name $TEMPL_ALMA_NAME --memory $MEM_ALMA --net0 virtio,bridge=$PKR_VAR_proxmox_network_bridge
 qm importdisk $VMID_ALMA $TMP_ALMA_IMG_NAME $PVE_DISK_STORAGE
-qm set $VMID_ALMA --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID_DEBIAN-disk-0
+qm set $VMID_ALMA --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID_ALMA-disk-0
 qm set $VMID_ALMA --ide2 $PVE_DISK_STORAGE:cloudinit
 qm set $VMID_ALMA --boot c --bootdisk scsi0
 qm set $VMID_ALMA --serial0 socket --vga serial0

@@ -20,6 +20,11 @@ https://pve.proxmox.com/wiki/Cloud-Init_Support
 If the systemd service fails for any reason, it's configured to trigger the `notify-email@%i.service`. It also sends a notification with `proxmox-mail-forward` on successful build.
 
 
+# Currently used OSs
+* Debian 12 (bookworm)
+* AlmaLinux 9
+* Ubuntu 22.04.3 (Jammy)
+
 ## Installation
 
 Installation is intended to be done on the Proxmox host itself otherwise it won't work.
