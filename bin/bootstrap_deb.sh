@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 set -e
-#------------Ubuntu/debian----------------------
+#------------debian----------------------
 
 export DEBIAN_FRONTEND=noninteractive
+
+while sudo lsof /var/lib/dpkg/lock-frontend ; do sleep 10; done;
+
 
 sudo apt-get install -y cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
 
