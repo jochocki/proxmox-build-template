@@ -49,6 +49,7 @@ echo $TEMPLATE_SSH_PUBLIC_KEY > /tmp/ssh_public_key
 qm set 7000 --ciuser $TEMPLATE_SSH_USER
 qm set 7000 --sshkeys /tmp/ssh_public_key
 qm set 7000 --name alma9-ci
+qm set 7000 --ciupgrade 0
 
 rm /tmp/ssh_public_key
 qm destroy 6999 --purge || echo "VM already missing."

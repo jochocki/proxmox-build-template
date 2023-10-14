@@ -42,6 +42,15 @@ variable "proxmox_network_bridge" {
   default = "vmbr0"
 }
 
+packer {
+  required_plugins {
+    proxmox = {
+      version = " >= 1.0.1"
+      source  = "github.com/hashicorp/proxmox"
+    }
+  }
+}
+
 source "proxmox-clone" "debian" {
   insecure_skip_tls_verify = true
   full_clone = false
@@ -57,8 +66,10 @@ source "proxmox-clone" "debian" {
   vm_id           = "8000"
 
   ssh_username = "packer"
-  qemu_agent = true
+  ssh_timeout = "10m"
 
+  qemu_agent = true
+  
   network_adapters {
     bridge = "${var.proxmox_network_bridge}"
     model  = "virtio"

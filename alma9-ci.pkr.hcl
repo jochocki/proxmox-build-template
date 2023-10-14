@@ -42,6 +42,15 @@ variable "proxmox_network_bridge" {
   default = "vmbr0"
 }
 
+packer {
+  required_plugins {
+    proxmox = {
+      version = " >= 1.0.1"
+      source  = "github.com/hashicorp/proxmox"
+    }
+  }
+}
+
 source "proxmox-clone" "alma9" {
   insecure_skip_tls_verify = true
   full_clone = false
@@ -58,6 +67,8 @@ source "proxmox-clone" "alma9" {
   vm_id           = "7000"
 
   ssh_username = "packer"
+  #for longer upgrades its good do extend the timeout time (default 5)
+  ssh_timeout = "10m"
   qemu_agent = true
 
   network_adapters {

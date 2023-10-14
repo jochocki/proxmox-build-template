@@ -79,7 +79,9 @@ IP_CONFIG_ALMA="ip=10.100.4.238/24,gw=10.100.4.1"
 
 wget -O $TMP_ALMA_IMG_NAME $CLOUD_INIT_ALMA_IMAGE_URL
 
-virt-customize --install qemu-guest-agent -a $TMP_ALMA_IMG_NAME
+#selinux needs to be disabled otherwise packer wont ssh
+virt-customize --install qemu-guest-agent  --run-command "sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config" -a $TMP_ALMA_IMG_NAME
+
 
 qm destroy 7000 --purge || echo "Template already missing."
 qm destroy 6999 --purge || echo "VM already missing."
@@ -90,11 +92,12 @@ qm set $VMID_ALMA --scsihw virtio-scsi-pci --scsi0 $PVE_DISK_STORAGE:vm-$VMID_AL
 qm set $VMID_ALMA --ide2 $PVE_DISK_STORAGE:cloudinit
 qm set $VMID_ALMA --boot c --bootdisk scsi0
 qm set $VMID_ALMA --serial0 socket --vga serial0
-#because of kernel panics bug cpu has to be host
-qm set $VMID_ALMA --cpu host
-qm set $VMID_ALMA --ipconfig0 $IP_CONFIG_ALMA
-qm resize $VMID_ALMA scsi0 $DISK_SIZE_ALMA
 
+#because of kernel panics bug cpu has to be host (issue with proxmox and rhel 9 based systems)
+qm set $VMID_ALMA --cpu host
+
+qm set $VMID_ALMA --ipconfig0 $IP_CONFIG_ALMA
+qm resize $VMID_ALMA scsi0 $DISK_SIZE_ALM
 qm template $VMID_ALMA
 
 rm $TMP_ALMA_IMG_NAME

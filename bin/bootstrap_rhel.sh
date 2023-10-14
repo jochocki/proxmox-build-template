@@ -4,7 +4,7 @@ set -e
 #------------Alma9----------------------
 hostnamectl 
 
-#sudo yum install -y cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
+sudo dnf install -y cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
 
 sudo tee /etc/multipath.conf <<-'EOF'
 defaults {

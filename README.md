@@ -42,11 +42,12 @@ apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_re
 apt-get update && apt-get install packer
 ```
 
-
 Make sure these VM IDs are not used:
 8999, 9000, 8000, 7999, 7000, 6999
 
 
+Note: You may want to install packer manually for newer version, which fixed a lot of bugs I've entcountered.
+https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
 
 ### Clone the repository
 
@@ -87,3 +88,7 @@ systemctl enable --now build-template.timer
 This project is a forked project originally created by https://github.com/mfin/proxmox-build-template
 
 I've just fix few bugs, added more cloud-init templates and extended documentation, so big shoutout goes to him.
+
+# Useful links
+https://developer.hashicorp.com/packer/integrations/hashicorp/proxmox/latest/components/builder/clone
+https://www.libguestfs.org/virt-customize.1.html

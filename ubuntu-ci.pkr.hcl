@@ -42,6 +42,15 @@ variable "proxmox_network_bridge" {
   default = "vmbr0"
 }
 
+packer {
+  required_plugins {
+    proxmox = {
+      version = " >= 1.0.1"
+      source  = "github.com/hashicorp/proxmox"
+    }
+  }
+}
+
 source "proxmox-clone" "ubuntu" {
   insecure_skip_tls_verify = true
   full_clone = false
@@ -57,6 +66,8 @@ source "proxmox-clone" "ubuntu" {
   vm_id           = "9000"
 
   ssh_username = "packer"
+  ssh_timeout = "10m"
+
   qemu_agent = true
 
   network_adapters {
