@@ -97,7 +97,7 @@ qm set $VMID_ALMA --serial0 socket --vga serial0
 qm set $VMID_ALMA --cpu host
 
 qm set $VMID_ALMA --ipconfig0 $IP_CONFIG_ALMA
-qm resize $VMID_ALMA scsi0 $DISK_SIZE_ALM
+qm resize $VMID_ALMA scsi0 $DISK_SIZE_ALMA
 qm template $VMID_ALMA
 
 rm $TMP_ALMA_IMG_NAME
