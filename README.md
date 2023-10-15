@@ -1,18 +1,18 @@
-# What's this project about?  
+# What's this project about?  
 
-This project builds, configures and maintain cloud-init enabled Linux VMs and transform them into a templates on Proxmox hypervisor.
+This project builds, configures and maintain cloud-init enabled Linux VMs and transform them into templates on Proxmox hypervisor.
 
-To automate this chain, cloudinit images are used in combination with proxmox CLI and packer.
+To automate this chain, cloud-init images are used in combination with proxmox CLI and packer.
 
 
 # How does it work?
 
 
-1. Service executes the nightly job, which first fetches the latest cloud-initmimages, then it creates and configures Proxmox VMs.
+1. Service executes the nightly job, which first fetches the latest cloud-init images, then it creates and configures Proxmox VMs.
 
-2. `packer` creates a templates from newly prepared VMs and configures the templates with cloud-init defaults (SSH user and public key). 
+2. `packer` creates templates from newly prepared VMs and configures the templates with cloud-init defaults (SSH user and public key). 
 
-You can easily customize this and add more cloud-init defaults. 
+You can easily customize this and add more cloud-init defaults. 
 List of all possible defaults:
 https://pve.proxmox.com/wiki/Cloud-Init_Support
 
@@ -21,13 +21,14 @@ If the systemd service fails for any reason, it's configured to trigger the `not
 
 
 # Currently used OSs
+
 * Debian 12 (bookworm)
-* AlmaLinux 9
+* AlmaLinux 9 (selinux set to permissive)
 * Ubuntu 22.04.3 (Jammy)
 
 ## Installation
 
-Installation is intended to be done on the Proxmox host itself otherwise it won't work.
+Installation is intended to be done on the Proxmox host itself, otherwise it won't work.
 
 ### Install dependencies
 ```
@@ -46,7 +47,7 @@ Make sure these VM IDs are not used:
 8999, 9000, 8000, 7999, 7000, 6999
 
 
-Note: You may want to install packer manually for newer version, which fixed a lot of bugs I've entcountered.
+Note: You may want to install packer manually for newer version, which fixed a lot of bugs I've encountered.
 https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
 
 ### Clone the repository
@@ -79,16 +80,18 @@ systemctl enable --now build-template.timer
 ```
 
 ## Run it now (for testing)
+
 ```
 /usr/bin/make -C /opt/build-template
 ```
 
-# Credit
+# Disclaimer
 
-This project is a forked project originally created by https://github.com/mfin/proxmox-build-template
-
+I've forked this project originally created by https://github.com/mfin/proxmox-build-template
 I've just fix few bugs, added more cloud-init templates and extended documentation, so big shoutout goes to him.
 
+
 # Useful links
+
 https://developer.hashicorp.com/packer/integrations/hashicorp/proxmox/latest/components/builder/clone
 https://www.libguestfs.org/virt-customize.1.html
