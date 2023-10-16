@@ -27,7 +27,7 @@ variable "proxmox_api_token_secret" {
     sensitive = true
 }
 
-#username / pass auth method 
+#If you want to use username/password instead of token
 #variable "proxmox_api_username" {
 #  type    = string
 #  default = "root@pve"
@@ -83,7 +83,7 @@ source "proxmox-clone" "ubuntu" {
   #password      = "${var.proxmox_api_password}"
 
   #token ID / secret auth method 
-  username      = "${var.proxmox_api_token_id"
+  username      = "${var.proxmox_api_token_id}"
   token         = "${var.proxmox_api_token_secret}"
   
   proxmox_url   = "${var.proxmox_api_url}"

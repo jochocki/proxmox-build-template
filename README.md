@@ -32,23 +32,28 @@ Installation is intended to be done on the Proxmox host itself, otherwise it won
 
 ### Install dependencies
 ```
-apt-get update && apt-get install packer libguestfs-tools wget vim git software-properties-common
-```
-```
-curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+apt-get update && apt-get install libguestfs-tools wget vim git unzip
 ```
 
-```
-apt-get update && apt-get install packer
-```
+### Manually install packer 
 
-Make sure these VM IDs are not used:
+Because I'm using token ID/secret as proxmox authentication method, packer must be install manually to attain newer version than proxmox currently supports as default package. New versions support this auth method and also fixes a lot of bugs you may encounter.
+
+https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
+
+TLDR 
+Download the newest version (currently 201.9.4)
+wget https://developer.hashicorp.com/packer/downloads#:~:text=Version%3A%201.9.4-,Download,-AMD64
+
+Unzip && move the precompile file
+unzip packer*
+mv packer /usr/bin/
+
+
+### Make sure these VM IDs are not used:
 8999, 9000, 8000, 7999, 7000, 6999
 
 
-Note: You may want to install packer manually for newer version, which fixed a lot of bugs I've encountered.
-https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
 
 ### Clone the repository
 
@@ -58,6 +63,10 @@ Clone the repository to `/opt`.
 git clone https://github.com/Ard3ny/proxmox-build-template.git /opt/build-template
 cd /opt/build-template
 ```
+
+### Create token/secret in proxmox
+If you don't know how, I've explained it in my blog post.
+
 
 ### Configuration
 
@@ -88,7 +97,7 @@ systemctl enable --now build-template.timer
 # Disclaimer
 
 I've forked this project originally created by https://github.com/mfin/proxmox-build-template
-I've just fix few bugs, added more cloud-init templates and extended documentation, so big shoutout goes to him.
+I've fix few bugs, added more cloud-init templates, changed install and auth methods and extended documentation, so big shoutout goes to him.
 
 
 # Useful links
