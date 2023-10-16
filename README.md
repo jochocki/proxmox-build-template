@@ -79,10 +79,11 @@ vim credentials.pkr.hcl
 ```
 ### Add packages you want to install
 Edit bin/bootstrap* files and add your own packages to be installed.
+```
 vim bin/bootstrap_deb.sh
 vim bin/bootstrap_ubuntu.sh
 vim bin/bootstrap_rhel.sh
-
+```
 
 ### Setup systemd timers
 
