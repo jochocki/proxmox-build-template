@@ -6,6 +6,10 @@ set -e
 
 export DEBIAN_FRONTEND=noninteractive
 
+#to fix a bug where sometimes lock-frontend is locked and script crashes
+#while sudo lsof /var/lib/dpkg/lock-frontend ; do sleep 10; done;
+#until i figure how to install lsof with proxmox api first
+sleep 60
 sudo apt-get install -y linux-modules-extra-$(uname -r) cifs-utils nfs-common open-iscsi lsscsi sg3-utils multipath-tools scsitools
 
 hostnamectl

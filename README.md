@@ -65,7 +65,7 @@ cd /opt/build-template
 ```
 
 ### Create token/secret in proxmox
-If you don't know how, I've explained it in my blog post.
+If you don't know how, I've explained it in a full tutorial in my [blog post.](https://blog.thetechcorner.sk/posts/Build-a-cloud-init-enabled-Linux-VM-templates-on-Proxmox-provisioned-by-packer/)
 
 
 ### Configuration

@@ -15,7 +15,7 @@ IP_CONFIG_UBUNTU="ip=10.100.4.240/24,gw=10.100.4.1"
 
 wget -O $TMP_UBUNTU_IMG_NAME $CLOUD_INIT_UBUNTU_IMAGE_URL
 
-virt-customize --install qemu-guest-agent,sudo -a $TMP_UBUNTU_IMG_NAME
+virt-customize --install qemu-guest-agent -a $TMP_UBUNTU_IMG_NAME
 
 qm destroy 9000 --purge || echo "Template already missing."
 qm destroy 8999 --purge || echo "VM already missing."
