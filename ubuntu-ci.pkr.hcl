@@ -5,37 +5,38 @@ variable "proxmox_host_node" {
 
 variable "proxmox_source_template" {
   type    = string
-  default = "ubuntu-temp"
+  default = "debian-temp"
 }
 
 variable "proxmox_template_name" {
   type    = string
-  default = "ubuntu-template"
+  default = "debian-template"
 }
 
 variable "proxmox_api_url" {
   type    = string
 }
 
-#Waiting for newer version of proxmox packer to loggin via token/secret
-#variable "proxmox_api_token_id" {
+# token/secret auth method 
+variable "proxmox_api_token_id" {
+  type    = string
+}
+
+variable "proxmox_api_token_secret" {
+    type = string
+    sensitive = true
+}
+
+#username / pass auth method 
+#variable "proxmox_api_username" {
 #  type    = string
+#  default = "root@pve"
 #}
 
-#variable "proxmox_api_token_secret" {
-#    type = string
-#    sensitive = true
+#variable "proxmox_api_password" {
+#  type    = string
+#  sensitive = true
 #}
-
-variable "proxmox_api_username" {
-  type    = string
-  default = "root@pve"
-}
-
-variable "proxmox_api_password" {
-  type    = string
-  sensitive = true
-}
 
 variable "proxmox_network_bridge" {
   type    = string
@@ -76,9 +77,15 @@ source "proxmox-clone" "ubuntu" {
   }
 
   node          = "${var.proxmox_host_node}"
-  username      = "${var.proxmox_api_username}"
-  password      = "${var.proxmox_api_password}"
-  #token         = "${var.proxmox_api_token_secret}"
+
+  #username/passwort auth method
+  #username      = "${var.proxmox_api_username}"
+  #password      = "${var.proxmox_api_password}"
+
+  #token ID / secret auth method 
+  username      = "${var.proxmox_api_token_id"
+  token         = "${var.proxmox_api_token_secret}"
+  
   proxmox_url   = "${var.proxmox_api_url}"
 }
 

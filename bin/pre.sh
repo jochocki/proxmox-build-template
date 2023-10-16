@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-
 #------------UBUNTU----------------------
 
 TMP_UBUNTU_IMG_NAME="/tmp/ubuntu.qcow2"
