@@ -31,6 +31,7 @@ If the systemd service fails for any reason, it's configured to trigger the `not
 Installation is intended to be done on the Proxmox host itself, otherwise it won't work.
 
 ### Install dependencies
+
 ```
 apt-get update && apt-get install libguestfs-tools wget vim git unzip
 ```
@@ -51,6 +52,7 @@ mv packer /usr/bin/
 
 
 ### Make sure these VM IDs are not used:
+
 8999, 9000, 8000, 7999, 7000, 6999
 
 
@@ -65,8 +67,17 @@ cd /opt/build-template
 ```
 
 ### Create token/secret in proxmox
+
 If you don't know how, I've explained it in a full tutorial in my [blog post.](https://blog.thetechcorner.sk/posts/Build-a-cloud-init-enabled-Linux-VM-templates-on-Proxmox-provisioned-by-packer/)
 
+TLDR over CLI 
+
+```
+pveum user add kubernetes@pve
+pveum acl modify / -user kubernetes@pve -role Administrator
+pveum acl modify / -user kubernetes@pve -role PVEAdmin
+pveum user token add kubernetes@pve test_id -privsep 0
+```
 
 ### Configuration
 
@@ -78,7 +89,9 @@ vim .env
 vim credentials.pkr.hcl
 ```
 ### Add packages you want to install
+
 Edit bin/bootstrap* files and add your own packages to be installed.
+
 ```
 vim bin/bootstrap_deb.sh
 vim bin/bootstrap_ubuntu.sh
