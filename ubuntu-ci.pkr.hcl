@@ -1,3 +1,13 @@
+variable "cloud_init_ubuntu_image_url" {
+  type = string
+  default = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+}
+
+variable "cloud_init_ubuntu_image_checksum" {
+  type = string
+  default = "https://cloud-images.ubuntu.com/jammy/current/SHA256SUMS"
+}
+
 variable "proxmox_host_node" {
   type    = string
   default = "pve"
@@ -21,17 +31,6 @@ variable "proxmox_api_token_secret" {
   type      = string
   sensitive = true
 }
-
-#If you want to use username/password instead of token
-#variable "proxmox_api_username" {
-#  type    = string
-#  default = "root@pve"
-#}
-
-#variable "proxmox_api_password" {
-#  type    = string
-#  sensitive = true
-#}
 
 variable "proxmox_network_bridge" {
   type    = string
