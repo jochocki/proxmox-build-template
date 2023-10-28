@@ -3,28 +3,23 @@ variable "proxmox_host_node" {
   default = "pve"
 }
 
-variable "proxmox_source_template" {
-  type    = string
-  default = "debian-temp"
-}
-
 variable "proxmox_template_name" {
   type    = string
-  default = "debian-template"
+  default = "ubuntu-template"
 }
 
 variable "proxmox_api_url" {
-  type    = string
+  type = string
 }
 
 # token/secret auth method 
 variable "proxmox_api_token_id" {
-  type    = string
+  type = string
 }
 
 variable "proxmox_api_token_secret" {
-    type = string
-    sensitive = true
+  type      = string
+  sensitive = true
 }
 
 #If you want to use username/password instead of token
@@ -52,13 +47,13 @@ packer {
   }
 }
 
-source "proxmox-clone" "ubuntu" {
-  insecure_skip_tls_verify = true
-  full_clone = false
-
-  template_name = "${var.proxmox_template_name}"
+source "proxmox-iso" "ubuntu" {
+  template_name        = "${var.proxmox_template_name}"
   template_description = "Built at ${timestamp()} by Packer"
-  clone_vm      = "${var.proxmox_source_template}"
+  unmount_iso          = true
+
+  iso_url      = "${var.cloud_init_ubuntu_image_url}"
+  iso_checksum = "file:${var.cloud_init_ubuntu_image_checksum}"
 
   os              = "l26"
   cores           = "1"
@@ -67,32 +62,29 @@ source "proxmox-clone" "ubuntu" {
   vm_id           = "9000"
 
   ssh_username = "packer"
-  ssh_timeout = "10m"
+  ssh_timeout  = "10m"
 
   qemu_agent = true
 
   network_adapters {
-    bridge = "${var.proxmox_network_bridge}"
-    model  = "virtio"
+    bridge   = "${var.proxmox_network_bridge}"
+    vlan_tag = "10"
+    model    = "virtio"
   }
 
-  node          = "${var.proxmox_host_node}"
+  node = "${var.proxmox_host_node}"
 
   #username/passwort auth method
   #username      = "${var.proxmox_api_username}"
   #password      = "${var.proxmox_api_password}"
 
   #token ID / secret auth method 
-  username      = "${var.proxmox_api_token_id}"
-  token         = "${var.proxmox_api_token_secret}"
-  
-  proxmox_url   = "${var.proxmox_api_url}"
+  username = "${var.proxmox_api_token_id}"
+  token    = "${var.proxmox_api_token_secret}"
+
+  proxmox_url = "${var.proxmox_api_url}"
 }
 
 build {
-  sources = ["source.proxmox-clone.ubuntu"]
-
-  provisioner "shell" {
-    script = "bin/bootstrap_ubuntu.sh"
-  }
+  sources = ["source.proxmox-iso.ubuntu"]
 }

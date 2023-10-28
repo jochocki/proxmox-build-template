@@ -1,7 +1,7 @@
 include .env
 export
 
-all: pre packer_init_alma9 packer_init_ubuntu packer_init_debian packer_ubuntu packer_debian packer_alma9 post
+all: packer_init_ubuntu packer_ubuntu
 
 pre:
 	bash bin/pre.sh
@@ -28,4 +28,4 @@ post:
 	bash bin/post.sh
 
 install:
-	ln -s /opt/build-template/systemd/* /etc/systemd/system/
+	ln -sf /opt/build-template/systemd/* /etc/systemd/system/
