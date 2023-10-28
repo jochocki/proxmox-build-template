@@ -8,6 +8,11 @@ variable "cloud_init_ubuntu_image_checksum" {
   default = "https://cloud-images.ubuntu.com/jammy/current/SHA256SUMS"
 }
 
+variable "proxmox_iso_datastore" {
+  type = string
+  default = "local"
+}
+
 variable "proxmox_host_node" {
   type    = string
   default = "pve"
@@ -53,6 +58,8 @@ source "proxmox-iso" "ubuntu" {
 
   iso_url      = "${var.cloud_init_ubuntu_image_url}"
   iso_checksum = "file:${var.cloud_init_ubuntu_image_checksum}"
+  iso_storage_pool = "${var.proxmox_iso_datastore}"
+  iso_download_pve = true
 
   os              = "l26"
   cores           = "1"
@@ -62,8 +69,6 @@ source "proxmox-iso" "ubuntu" {
 
   ssh_username = "packer"
   ssh_timeout  = "10m"
-
-  qemu_agent = true
 
   network_adapters {
     bridge   = "${var.proxmox_network_bridge}"

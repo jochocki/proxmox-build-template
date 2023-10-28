@@ -1,6 +1,3 @@
-include .env
-export
-
 all: packer_init_ubuntu packer_ubuntu
 
 pre:
